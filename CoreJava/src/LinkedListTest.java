@@ -5,8 +5,6 @@ import java.util.ListIterator;
 
 final class ImmutableClass{
 	
-
-
 private String list;
 	
 	public ImmutableClass(String test) {
@@ -37,6 +35,5 @@ public class LinkedListTest {
 		ImmutableClass imt = new ImmutableClass(new String("test"));
 		imt.setList("Test1");
 		System.out.println(imt);
-	}
-	
+	}	
 }
