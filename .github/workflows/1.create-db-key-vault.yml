@@ -27,7 +27,7 @@ permissions:
 jobs:
   change-management:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/non-master'
     steps:
       - name: Check Change Request
         run: |
