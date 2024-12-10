@@ -44,6 +44,7 @@ jobs:
           echo "Deploying change ${{ inputs.change_request }}: ${{ inputs.description }}"
 
   create_key_vault:
+    needs: change-management
     runs-on: ubuntu-latest
 
     steps:
