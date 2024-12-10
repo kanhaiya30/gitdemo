@@ -43,6 +43,14 @@ jobs:
 
           echo "Deploying change ${{ inputs.change_request }}: ${{ inputs.description }}"
 
+  echo_branch:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Echo the current branch (github.ref)
+        run: |
+          echo "Current branch: ${{ github.ref }}"
+
   create_key_vault:
     needs: change-management
     if: ${{ (github.ref == 'refs/heads/master' && needs.change-management.result == 'success') || github.ref != 'refs/heads/master' }}
