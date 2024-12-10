@@ -1,0 +1,54 @@
+name: 'Create Azure Key Vault for Sql Admin Credential'
+
+on:
+  workflow_dispatch:
+    inputs:
+      change_request:
+        description: 'ServiceNow Change Req #'
+        required: false
+      description:
+        description: 'Short Description'
+        required: false
+      approved:
+        description: 'Approved'
+        required: false
+        default: 'No'
+        type: choice
+        options:
+          - 'No'
+          - 'Yes'
+
+permissions:
+  id-token: write
+  contents: write
+  security-events: write
+  actions: read
+
+jobs:
+  change-management:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Check Change Request
+        run: |
+          if [[ "${{ inputs.change_request }}" != CHG* ]]; then
+            echo "Invalid change number"
+            exit 1
+          fi
+
+          if [[ "${{ inputs.approved }}" == 'No' ]]; then
+            echo "Change request is not approved. Skipping the task."
+            exit 1
+          fi
+
+          echo "Deploying change ${{ inputs.change_request }}: ${{ inputs.description }}"
+
+  create_key_vault:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Echo a message
+        run: echo "Hello, this is a sample workflow!"
